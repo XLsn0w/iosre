@@ -1,0 +1,786 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		359A7931236EFF1900F2BB0A /* MDConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 359A7930236EFF1900F2BB0A /* MDConfig.plist */; };
+		359A793B236EFF1900F2BB0A /* libWeChatRedEnvelopesTweakDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359A793A236EFF1900F2BB0A /* libWeChatRedEnvelopesTweakDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		359A7940236EFF1900F2BB0A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359A793F236EFF1900F2BB0A /* JavaScriptCore.framework */; };
+		359A7942236EFF1900F2BB0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359A7941236EFF1900F2BB0A /* Foundation.framework */; };
+		359A7944236EFF1900F2BB0A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359A7943236EFF1900F2BB0A /* UIKit.framework */; };
+		359A7949236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 359A7948236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.mm */; };
+		359A794C236EFF1900F2BB0A /* MDConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A794B236EFF1900F2BB0A /* MDConfigManager.h */; };
+		359A794E236EFF1900F2BB0A /* MDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 359A794D236EFF1900F2BB0A /* MDConfigManager.m */; };
+		359A7950236EFF1900F2BB0A /* MDCycriptManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A794F236EFF1900F2BB0A /* MDCycriptManager.h */; };
+		359A7952236EFF1900F2BB0A /* MDCycriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 359A7951236EFF1900F2BB0A /* MDCycriptManager.m */; };
+		359A7954236EFF1900F2BB0A /* MDMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A7953236EFF1900F2BB0A /* MDMethodTrace.h */; };
+		359A7956236EFF1900F2BB0A /* MDMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 359A7955236EFF1900F2BB0A /* MDMethodTrace.m */; };
+		359A7959236EFF1900F2BB0A /* a1a2-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A7958236EFF1900F2BB0A /* a1a2-selectortramps-arm.s */; };
+		359A795B236EFF1900F2BB0A /* a1a2-selectortramps-arm64.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A795A236EFF1900F2BB0A /* a1a2-selectortramps-arm64.s */; };
+		359A795D236EFF1900F2BB0A /* a1a2-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A795C236EFF1900F2BB0A /* a1a2-selectortramps-i386.s */; };
+		359A795F236EFF1900F2BB0A /* a1a2-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A795E236EFF1900F2BB0A /* a1a2-selectortramps-x86_64.s */; };
+		359A7961236EFF1900F2BB0A /* a2a3-selectortramps-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A7960236EFF1900F2BB0A /* a2a3-selectortramps-arm.s */; };
+		359A7963236EFF1900F2BB0A /* a2a3-selectortramps-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A7962236EFF1900F2BB0A /* a2a3-selectortramps-i386.s */; };
+		359A7965236EFF1900F2BB0A /* a2a3-selectortramps-x86_64.s in Sources */ = {isa = PBXBuildFile; fileRef = 359A7964236EFF1900F2BB0A /* a2a3-selectortramps-x86_64.s */; };
+		359A7967236EFF1900F2BB0A /* OCMethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A7966236EFF1900F2BB0A /* OCMethodTrace.h */; };
+		359A7969236EFF1900F2BB0A /* OCMethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 359A7968236EFF1900F2BB0A /* OCMethodTrace.m */; };
+		359A796B236EFF1900F2BB0A /* OCSelectorTrampolines.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A796A236EFF1900F2BB0A /* OCSelectorTrampolines.h */; };
+		359A796D236EFF1900F2BB0A /* OCSelectorTrampolines.mm in Sources */ = {isa = PBXBuildFile; fileRef = 359A796C236EFF1900F2BB0A /* OCSelectorTrampolines.mm */; };
+		359A7971236EFF1900F2BB0A /* LLDBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A7970236EFF1900F2BB0A /* LLDBTools.h */; };
+		359A7973236EFF1900F2BB0A /* LLDBTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 359A7972236EFF1900F2BB0A /* LLDBTools.mm */; };
+		359A7978236EFF1900F2BB0A /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 359A7977236EFF1900F2BB0A /* AntiAntiDebug.m */; };
+		359A797B236EFF1900F2BB0A /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 359A797A236EFF1900F2BB0A /* fishhook.c */; };
+		359A797D236EFF1900F2BB0A /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A797C236EFF1900F2BB0A /* fishhook.h */; };
+		359A797F236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 359A797E236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.h */; };
+		359A7981236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 359A7980236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		359A793C236EFF1900F2BB0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 359A791E236EFF1900F2BB0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 359A7939236EFF1900F2BB0A;
+			remoteInfo = WeChatRedEnvelopesTweakDylib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		359A7926236EFF1900F2BB0A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				359A793B236EFF1900F2BB0A /* libWeChatRedEnvelopesTweakDylib.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		359A7929236EFF1900F2BB0A /* WeChatRedEnvelopesTweak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChatRedEnvelopesTweak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		359A792C236EFF1900F2BB0A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		359A792E236EFF1900F2BB0A /* quick-resign.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "quick-resign.sh"; sourceTree = "<group>"; };
+		359A7930236EFF1900F2BB0A /* MDConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MDConfig.plist; sourceTree = "<group>"; };
+		359A7933236EFF1900F2BB0A /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; path = "put ipa or app here"; sourceTree = "<group>"; };
+		359A7934236EFF1900F2BB0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		359A793A236EFF1900F2BB0A /* libWeChatRedEnvelopesTweakDylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libWeChatRedEnvelopesTweakDylib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		359A793F236EFF1900F2BB0A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		359A7941236EFF1900F2BB0A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		359A7943236EFF1900F2BB0A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		359A7947236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = WeChatRedEnvelopesTweakDylib.xm; sourceTree = "<group>"; };
+		359A7948236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WeChatRedEnvelopesTweakDylib.mm; sourceTree = "<group>"; };
+		359A794B236EFF1900F2BB0A /* MDConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDConfigManager.h; sourceTree = "<group>"; };
+		359A794D236EFF1900F2BB0A /* MDConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDConfigManager.m; sourceTree = "<group>"; };
+		359A794F236EFF1900F2BB0A /* MDCycriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDCycriptManager.h; sourceTree = "<group>"; };
+		359A7951236EFF1900F2BB0A /* MDCycriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDCycriptManager.m; sourceTree = "<group>"; };
+		359A7953236EFF1900F2BB0A /* MDMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMethodTrace.h; sourceTree = "<group>"; };
+		359A7955236EFF1900F2BB0A /* MDMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMethodTrace.m; sourceTree = "<group>"; };
+		359A7958236EFF1900F2BB0A /* a1a2-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-arm.s"; sourceTree = "<group>"; };
+		359A795A236EFF1900F2BB0A /* a1a2-selectortramps-arm64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-arm64.s"; sourceTree = "<group>"; };
+		359A795C236EFF1900F2BB0A /* a1a2-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-i386.s"; sourceTree = "<group>"; };
+		359A795E236EFF1900F2BB0A /* a1a2-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a1a2-selectortramps-x86_64.s"; sourceTree = "<group>"; };
+		359A7960236EFF1900F2BB0A /* a2a3-selectortramps-arm.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a2a3-selectortramps-arm.s"; sourceTree = "<group>"; };
+		359A7962236EFF1900F2BB0A /* a2a3-selectortramps-i386.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a2a3-selectortramps-i386.s"; sourceTree = "<group>"; };
+		359A7964236EFF1900F2BB0A /* a2a3-selectortramps-x86_64.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "a2a3-selectortramps-x86_64.s"; sourceTree = "<group>"; };
+		359A7966236EFF1900F2BB0A /* OCMethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCMethodTrace.h; sourceTree = "<group>"; };
+		359A7968236EFF1900F2BB0A /* OCMethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCMethodTrace.m; sourceTree = "<group>"; };
+		359A796A236EFF1900F2BB0A /* OCSelectorTrampolines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCSelectorTrampolines.h; sourceTree = "<group>"; };
+		359A796C236EFF1900F2BB0A /* OCSelectorTrampolines.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCSelectorTrampolines.mm; sourceTree = "<group>"; };
+		359A796E236EFF1900F2BB0A /* selectortramps.mac */ = {isa = PBXFileReference; lastKnownFileType = text; path = selectortramps.mac; sourceTree = "<group>"; };
+		359A7970236EFF1900F2BB0A /* LLDBTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLDBTools.h; sourceTree = "<group>"; };
+		359A7972236EFF1900F2BB0A /* LLDBTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LLDBTools.mm; sourceTree = "<group>"; };
+		359A7975236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "WeChatRedEnvelopesTweakDylib-Prefix.pch"; path = "../WeChatRedEnvelopesTweakDylib-Prefix.pch"; sourceTree = "<group>"; };
+		359A7977236EFF1900F2BB0A /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AntiAntiDebug.m; sourceTree = "<group>"; };
+		359A797A236EFF1900F2BB0A /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		359A797C236EFF1900F2BB0A /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		359A797E236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeChatRedEnvelopesTweakDylib.h; sourceTree = "<group>"; };
+		359A7980236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeChatRedEnvelopesTweakDylib.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		359A7923236EFF1900F2BB0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		359A7937236EFF1900F2BB0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				359A7940236EFF1900F2BB0A /* JavaScriptCore.framework in Frameworks */,
+				359A7944236EFF1900F2BB0A /* UIKit.framework in Frameworks */,
+				359A7942236EFF1900F2BB0A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		359A791D236EFF1900F2BB0A = {
+			isa = PBXGroup;
+			children = (
+				359A792B236EFF1900F2BB0A /* WeChatRedEnvelopesTweak */,
+				359A7945236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib */,
+				359A793E236EFF1900F2BB0A /* Frameworks */,
+				359A792A236EFF1900F2BB0A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		359A792A236EFF1900F2BB0A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				359A7929236EFF1900F2BB0A /* WeChatRedEnvelopesTweak.app */,
+				359A793A236EFF1900F2BB0A /* libWeChatRedEnvelopesTweakDylib.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		359A792B236EFF1900F2BB0A /* WeChatRedEnvelopesTweak */ = {
+			isa = PBXGroup;
+			children = (
+				359A792C236EFF1900F2BB0A /* icon.png */,
+				359A7934236EFF1900F2BB0A /* Info.plist */,
+				359A792D236EFF1900F2BB0A /* Scripts */,
+				359A792F236EFF1900F2BB0A /* Config */,
+				359A7932236EFF1900F2BB0A /* TargetApp */,
+			);
+			path = WeChatRedEnvelopesTweak;
+			sourceTree = "<group>";
+		};
+		359A792D236EFF1900F2BB0A /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				359A792E236EFF1900F2BB0A /* quick-resign.sh */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+		359A792F236EFF1900F2BB0A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				359A7930236EFF1900F2BB0A /* MDConfig.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		359A7932236EFF1900F2BB0A /* TargetApp */ = {
+			isa = PBXGroup;
+			children = (
+				359A7933236EFF1900F2BB0A /* put ipa or app here */,
+			);
+			path = TargetApp;
+			sourceTree = "<group>";
+		};
+		359A793E236EFF1900F2BB0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				359A793F236EFF1900F2BB0A /* JavaScriptCore.framework */,
+				359A7941236EFF1900F2BB0A /* Foundation.framework */,
+				359A7943236EFF1900F2BB0A /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		359A7945236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib */ = {
+			isa = PBXGroup;
+			children = (
+				359A797E236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.h */,
+				359A7980236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.m */,
+				359A7946236EFF1900F2BB0A /* Logos */,
+				359A794A236EFF1900F2BB0A /* Config */,
+				359A7957236EFF1900F2BB0A /* Trace */,
+				359A796F236EFF1900F2BB0A /* Tools */,
+				359A7976236EFF1900F2BB0A /* AntiAntiDebug */,
+				359A7979236EFF1900F2BB0A /* fishhook */,
+				359A7974236EFF1900F2BB0A /* Supporting Files */,
+			);
+			path = WeChatRedEnvelopesTweakDylib;
+			sourceTree = "<group>";
+		};
+		359A7946236EFF1900F2BB0A /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				359A7947236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.xm */,
+				359A7948236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.mm */,
+			);
+			path = Logos;
+			sourceTree = "<group>";
+		};
+		359A794A236EFF1900F2BB0A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				359A794B236EFF1900F2BB0A /* MDConfigManager.h */,
+				359A794D236EFF1900F2BB0A /* MDConfigManager.m */,
+				359A794F236EFF1900F2BB0A /* MDCycriptManager.h */,
+				359A7951236EFF1900F2BB0A /* MDCycriptManager.m */,
+				359A7953236EFF1900F2BB0A /* MDMethodTrace.h */,
+				359A7955236EFF1900F2BB0A /* MDMethodTrace.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		359A7957236EFF1900F2BB0A /* Trace */ = {
+			isa = PBXGroup;
+			children = (
+				359A7958236EFF1900F2BB0A /* a1a2-selectortramps-arm.s */,
+				359A795A236EFF1900F2BB0A /* a1a2-selectortramps-arm64.s */,
+				359A795C236EFF1900F2BB0A /* a1a2-selectortramps-i386.s */,
+				359A795E236EFF1900F2BB0A /* a1a2-selectortramps-x86_64.s */,
+				359A7960236EFF1900F2BB0A /* a2a3-selectortramps-arm.s */,
+				359A7962236EFF1900F2BB0A /* a2a3-selectortramps-i386.s */,
+				359A7964236EFF1900F2BB0A /* a2a3-selectortramps-x86_64.s */,
+				359A7966236EFF1900F2BB0A /* OCMethodTrace.h */,
+				359A7968236EFF1900F2BB0A /* OCMethodTrace.m */,
+				359A796A236EFF1900F2BB0A /* OCSelectorTrampolines.h */,
+				359A796C236EFF1900F2BB0A /* OCSelectorTrampolines.mm */,
+				359A796E236EFF1900F2BB0A /* selectortramps.mac */,
+			);
+			path = Trace;
+			sourceTree = "<group>";
+		};
+		359A796F236EFF1900F2BB0A /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				359A7970236EFF1900F2BB0A /* LLDBTools.h */,
+				359A7972236EFF1900F2BB0A /* LLDBTools.mm */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		359A7974236EFF1900F2BB0A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				359A7975236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib-Prefix.pch */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		359A7976236EFF1900F2BB0A /* AntiAntiDebug */ = {
+			isa = PBXGroup;
+			children = (
+				359A7977236EFF1900F2BB0A /* AntiAntiDebug.m */,
+			);
+			path = AntiAntiDebug;
+			sourceTree = "<group>";
+		};
+		359A7979236EFF1900F2BB0A /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				359A797A236EFF1900F2BB0A /* fishhook.c */,
+				359A797C236EFF1900F2BB0A /* fishhook.h */,
+			);
+			path = fishhook;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		359A7938236EFF1900F2BB0A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				359A7950236EFF1900F2BB0A /* MDCycriptManager.h in Headers */,
+				359A7954236EFF1900F2BB0A /* MDMethodTrace.h in Headers */,
+				359A797D236EFF1900F2BB0A /* fishhook.h in Headers */,
+				359A7971236EFF1900F2BB0A /* LLDBTools.h in Headers */,
+				359A797F236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.h in Headers */,
+				359A794C236EFF1900F2BB0A /* MDConfigManager.h in Headers */,
+				359A796B236EFF1900F2BB0A /* OCSelectorTrampolines.h in Headers */,
+				359A7967236EFF1900F2BB0A /* OCMethodTrace.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		359A7928236EFF1900F2BB0A /* WeChatRedEnvelopesTweak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 359A7987236EFF1900F2BB0A /* Build configuration list for PBXNativeTarget "WeChatRedEnvelopesTweak" */;
+			buildPhases = (
+				359A7922236EFF1900F2BB0A /* Sources */,
+				359A7923236EFF1900F2BB0A /* Frameworks */,
+				359A7924236EFF1900F2BB0A /* ShellScript */,
+				359A7925236EFF1900F2BB0A /* Resources */,
+				359A7926236EFF1900F2BB0A /* CopyFiles */,
+				359A7927236EFF1900F2BB0A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				359A793D236EFF1900F2BB0A /* PBXTargetDependency */,
+			);
+			name = WeChatRedEnvelopesTweak;
+			productName = WeChatRedEnvelopesTweak;
+			productReference = 359A7929236EFF1900F2BB0A /* WeChatRedEnvelopesTweak.app */;
+			productType = "com.apple.product-type.application";
+		};
+		359A7939236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 359A7984236EFF1900F2BB0A /* Build configuration list for PBXNativeTarget "WeChatRedEnvelopesTweakDylib" */;
+			buildPhases = (
+				359A7935236EFF1900F2BB0A /* ShellScript */,
+				359A7936236EFF1900F2BB0A /* Sources */,
+				359A7937236EFF1900F2BB0A /* Frameworks */,
+				359A7938236EFF1900F2BB0A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeChatRedEnvelopesTweakDylib;
+			productName = WeChatRedEnvelopesTweakDylib;
+			productReference = 359A793A236EFF1900F2BB0A /* libWeChatRedEnvelopesTweakDylib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		359A791E236EFF1900F2BB0A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = XLsn0w;
+				TargetAttributes = {
+					359A7928236EFF1900F2BB0A = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					359A7939236EFF1900F2BB0A = {
+						CreatedOnToolsVersion = 11.2;
+					};
+				};
+			};
+			buildConfigurationList = 359A7921236EFF1900F2BB0A /* Build configuration list for PBXProject "WeChatRedEnvelopesTweak" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 359A791D236EFF1900F2BB0A;
+			productRefGroup = 359A792A236EFF1900F2BB0A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				359A7928236EFF1900F2BB0A /* WeChatRedEnvelopesTweak */,
+				359A7939236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		359A7925236EFF1900F2BB0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				359A7931236EFF1900F2BB0A /* MDConfig.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		359A7924236EFF1900F2BB0A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /opt/MonkeyDev/Tools/pack.sh;
+		};
+		359A7927236EFF1900F2BB0A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/Tools/pack.sh codesign";
+		};
+		359A7935236EFF1900F2BB0A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp-logos";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		359A7922236EFF1900F2BB0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		359A7936236EFF1900F2BB0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				359A7952236EFF1900F2BB0A /* MDCycriptManager.m in Sources */,
+				359A7981236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.m in Sources */,
+				359A795B236EFF1900F2BB0A /* a1a2-selectortramps-arm64.s in Sources */,
+				359A7959236EFF1900F2BB0A /* a1a2-selectortramps-arm.s in Sources */,
+				359A795F236EFF1900F2BB0A /* a1a2-selectortramps-x86_64.s in Sources */,
+				359A7969236EFF1900F2BB0A /* OCMethodTrace.m in Sources */,
+				359A794E236EFF1900F2BB0A /* MDConfigManager.m in Sources */,
+				359A797B236EFF1900F2BB0A /* fishhook.c in Sources */,
+				359A7978236EFF1900F2BB0A /* AntiAntiDebug.m in Sources */,
+				359A796D236EFF1900F2BB0A /* OCSelectorTrampolines.mm in Sources */,
+				359A795D236EFF1900F2BB0A /* a1a2-selectortramps-i386.s in Sources */,
+				359A7963236EFF1900F2BB0A /* a2a3-selectortramps-i386.s in Sources */,
+				359A7961236EFF1900F2BB0A /* a2a3-selectortramps-arm.s in Sources */,
+				359A7949236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib.mm in Sources */,
+				359A7973236EFF1900F2BB0A /* LLDBTools.mm in Sources */,
+				359A7965236EFF1900F2BB0A /* a2a3-selectortramps-x86_64.s in Sources */,
+				359A7956236EFF1900F2BB0A /* MDMethodTrace.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		359A793D236EFF1900F2BB0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 359A7939236EFF1900F2BB0A /* WeChatRedEnvelopesTweakDylib */;
+			targetProxy = 359A793C236EFF1900F2BB0A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		359A7982236EFF1900F2BB0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		359A7983236EFF1900F2BB0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		359A7985236EFF1900F2BB0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WeChatRedEnvelopesTweakDylib/WeChatRedEnvelopesTweakDylib-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libWeChatRedEnvelopesTweakDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"WeChatRedEnvelopesTweakDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-weak_library",
+					"$(MonkeyDevPath)/Frameworks/libsubstrate.dylib",
+					"-lcycript",
+					"-framework",
+					RevealServer,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		359A7986236EFF1900F2BB0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WeChatRedEnvelopesTweakDylib/WeChatRedEnvelopesTweakDylib-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libWeChatRedEnvelopesTweakDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"WeChatRedEnvelopesTweakDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-weak_library",
+					"$(MonkeyDevPath)/Frameworks/libsubstrate.dylib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		359A7988236EFF1900F2BB0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = WeChatRedEnvelopesTweak/Info.plist;
+				MONKEYDEV_ADD_SUBSTRATE = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_DEFAULT_BUNDLEID = NO;
+				MONKEYDEV_INSERT_DYLIB = YES;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
+				MONKEYDEV_TARGET_APP = Optional;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xlsn0w.WeChatRedEnvelopesTweak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		359A7989236EFF1900F2BB0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = WeChatRedEnvelopesTweak/Info.plist;
+				MONKEYDEV_ADD_SUBSTRATE = YES;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_DEFAULT_BUNDLEID = NO;
+				MONKEYDEV_INSERT_DYLIB = YES;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
+				MONKEYDEV_TARGET_APP = Optional;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xlsn0w.WeChatRedEnvelopesTweak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		359A7921236EFF1900F2BB0A /* Build configuration list for PBXProject "WeChatRedEnvelopesTweak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				359A7982236EFF1900F2BB0A /* Debug */,
+				359A7983236EFF1900F2BB0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		359A7984236EFF1900F2BB0A /* Build configuration list for PBXNativeTarget "WeChatRedEnvelopesTweakDylib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				359A7985236EFF1900F2BB0A /* Debug */,
+				359A7986236EFF1900F2BB0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		359A7987236EFF1900F2BB0A /* Build configuration list for PBXNativeTarget "WeChatRedEnvelopesTweak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				359A7988236EFF1900F2BB0A /* Debug */,
+				359A7989236EFF1900F2BB0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 359A791E236EFF1900F2BB0A /* Project object */;
+}
