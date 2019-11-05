@@ -1,0 +1,17 @@
+Package: com.jianglan.autoGetRedEnv
+Name: autoGetRedEnv
+Version: 1.0-1
+Description: 
+Section: System
+Depends: firmware (>= 5.0)
+Conflicts: 
+Replaces: 
+Priority: optional
+Architecture: iphoneos-arm
+Author: JiangLan
+dev: 
+Homepage: 
+Depiction: 
+Maintainer: 
+Icon: 
+
