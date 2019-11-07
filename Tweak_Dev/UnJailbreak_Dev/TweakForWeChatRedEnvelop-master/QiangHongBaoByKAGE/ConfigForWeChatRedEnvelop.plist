@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MainSwitch</key>
+	<true/>
+	<key>MineSwitch</key>
+	<false/>
+	<key>SingleSwitch</key>
+	<false/>
+	<key>ChatSwitch</key>
+	<true/>
+	<key>DelaySeconds</key>
+	<real>2.5</real>
+	<key>PreventRevokeMsg</key>
+	<false/>
+	<key>IgnoreSingle</key>
+	<array>
+		<string>填写用户的微信号</string>
+	</array>
+	<key>IgnoreChat</key>
+	<array>
+		<string>填写群的名称</string>
+	</array>
+</dict>
+</plist>

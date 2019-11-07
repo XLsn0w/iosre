@@ -1,0 +1,9 @@
+Package: com.ezio.wechatredenvelopeshelper
+Name: WeChatRedEnvelopesHelper
+Depends: mobilesubstrate
+Version: 2.1.0
+Architecture: iphoneos-arm
+Description: 微信自动抢红包助手
+Maintainer: ezio
+Author: ezio
+Section: Tweaks
