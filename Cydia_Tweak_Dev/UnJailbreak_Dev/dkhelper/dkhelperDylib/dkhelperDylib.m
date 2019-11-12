@@ -1,17 +1,9 @@
-//
-//  dkhelperDylib.m
-//  dkhelperDylib
-//
-//  Created by 朱德坤 on 2019/1/23.
-//  Copyright (c) 2019 DKJone. All rights reserved.
-//
 
 #import "dkhelperDylib.h"
 #import <CaptainHook/CaptainHook.h>
 #import <UIKit/UIKit.h>
 #import <Cycript/Cycript.h>
 #import <MDCycriptManager.h>
-
 
 //MARK: - 请求数据伪装
 
