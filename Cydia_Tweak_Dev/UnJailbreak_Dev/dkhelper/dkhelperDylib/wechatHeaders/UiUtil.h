@@ -7,8 +7,6 @@
 #import <objc/NSObject.h>
 
 @interface UiUtil : NSObject
-{
-}
 
 + (void)showCameraAlertForSplitViewIfNeed:(id)arg1 currentWidth:(double)arg2;
 + (_Bool)isiPadSplitViewModeNow;
