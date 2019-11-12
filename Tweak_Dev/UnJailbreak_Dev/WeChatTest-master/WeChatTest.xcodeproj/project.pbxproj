@@ -199,9 +199,9 @@
 		B2FF653F20B0318200A59BC5 /* Logos */ = {
 			isa = PBXGroup;
 			children = (
+				B2718A7720B935D70081102E /* WeChatHeader.h */,
 				B2FF654020B0318200A59BC5 /* WeChatTestDylib.xm */,
 				B2FF654120B0318200A59BC5 /* WeChatTestDylib.mm */,
-				B2718A7720B935D70081102E /* WeChatHeader.h */,
 				B289D32B20BDB0ED00D4706F /* WeChatRedEnvelopesQueue.h */,
 				B289D32C20BDB0ED00D4706F /* WeChatRedEnvelopesQueue.m */,
 				B2FF656F20B0319600A59BC5 /* WeixinSwitchCell.h */,

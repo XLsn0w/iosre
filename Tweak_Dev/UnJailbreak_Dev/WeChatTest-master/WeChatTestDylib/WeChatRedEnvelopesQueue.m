@@ -10,14 +10,13 @@
 
 @interface WeChatRedEnvelopesQueue()
 
-@property (nonatomic, strong) NSMutableArray   *queue;
-
+@property (nonatomic, strong) NSMutableArray *queue;
 
 @end
 
 @implementation WeChatRedEnvelopesQueue
 
-+ (instancetype)sharedQueue{
++ (instancetype)sharedQueue {
     static WeChatRedEnvelopesQueue *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -26,8 +25,7 @@
     return instance;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _queue = [NSMutableArray array];

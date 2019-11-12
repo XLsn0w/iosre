@@ -11,6 +11,7 @@
 @interface WeChatRedEnvelopesQueue : NSObject
 
 + (instancetype)sharedQueue;
+
 - (void)inqueue:(NSMutableDictionary *)dict;
 - (NSMutableDictionary *)dequeue;
 
