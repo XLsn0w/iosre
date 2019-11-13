@@ -85,7 +85,7 @@
 		114CCC3D21F817D500A4646E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		114CCC3F21F817D500A4646E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		114CCC4121F817D500A4646E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		114CCC4521F817D500A4646E /* dkhelperDylib.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = dkhelperDylib.xm; path = Logos/dkhelperDylib.xm; sourceTree = "<group>"; };
+		114CCC4521F817D500A4646E /* dkhelperDylib.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = dkhelperDylib.xm; path = Logos/dkhelperDylib.xm; sourceTree = "<group>"; };
 		114CCC4621F817D500A4646E /* dkhelperDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = dkhelperDylib.mm; path = Logos/dkhelperDylib.mm; sourceTree = "<group>"; };
 		114CCC4921F817D500A4646E /* MDConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MDConfigManager.h; path = Config/MDConfigManager.h; sourceTree = "<group>"; };
 		114CCC4B21F817D500A4646E /* MDConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MDConfigManager.m; path = Config/MDConfigManager.m; sourceTree = "<group>"; };

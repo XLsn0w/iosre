@@ -12,7 +12,6 @@
 
 %end
 
-
 %hook NewSettingViewController
 - (void)reloadTableData{
     %orig;
