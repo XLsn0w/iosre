@@ -28,7 +28,7 @@ CHConstructor{
         NSError* error;
         NSString* result = [manager evaluateCycript:@"UIApp" error:&error];
         NSLog(@"result: %@", result);
-        if(error.code != 0){
+        if(error.code != 0) {
             NSLog(@"error: %@", error.localizedDescription);
         }
 #endif
