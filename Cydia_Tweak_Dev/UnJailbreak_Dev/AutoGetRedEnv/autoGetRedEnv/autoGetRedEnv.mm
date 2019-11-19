@@ -11,8 +11,7 @@
 
 CHDeclareClass(CMessageMgr);
 
-CHMethod(2, void, CMessageMgr, AsyncOnAddMsg, id, arg1, MsgWrap, id, arg2)
-{
+CHMethod(2, void, CMessageMgr, AsyncOnAddMsg, id, arg1, MsgWrap, id, arg2) {
     CHSuper(2, CMessageMgr, AsyncOnAddMsg, arg1, MsgWrap, arg2);
     Ivar uiMessageTypeIvar = class_getInstanceVariable(objc_getClass("CMessageWrap"), "m_uiMessageType");
     ptrdiff_t offset = ivar_getOffset(uiMessageTypeIvar);
