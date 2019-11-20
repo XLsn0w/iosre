@@ -1,9 +1,9 @@
-Package: com.swiftyper.wechatredenvelop
+Package: com.xlsn0w.wechatcatchredenvelop
 Name: WeChatRedEnvelop
 Depends: mobilesubstrate
-Version: 1.2.1
+Version: 2.0.0
 Architecture: iphoneos-arm
 Description: 微信抢红包插件
-Maintainer: 请叫我小锅
-Author: 请叫我小锅
+Maintainer: XLsn0w
+Author: XLsn0w
 Section: Tweaks
