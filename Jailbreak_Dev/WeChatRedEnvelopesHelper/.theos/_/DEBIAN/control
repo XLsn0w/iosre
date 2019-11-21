@@ -1,10 +1,10 @@
-Package: com.kevll.wechatredenvelopeshelper
-Name: WeChatRedEnvelopesHelper
+Package: com.xlsn0w.wxhelper
+Name: 微信自动抢红包助手
 Depends: mobilesubstrate
 Architecture: iphoneos-arm
 Description: 微信自动抢红包助手
-Maintainer: kevll
-Author: kevll
+Maintainer: XLsn0w
+Author: XLsn0w
 Section: Tweaks
-Version: 0.0.1-40+debug
-Installed-Size: 276
+Version: 1.0.1-1+debug
+Installed-Size: 260
