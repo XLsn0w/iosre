@@ -1,5 +1,5 @@
-Package: com.xlsn0w.wechatcatchredenvelop
-Name: WeChatRedEnvelop
+Package: com.xlsn0w.wxhb
+Name: 微信抢红包
 Depends: mobilesubstrate
 Version: 2.0.0
 Architecture: iphoneos-arm
