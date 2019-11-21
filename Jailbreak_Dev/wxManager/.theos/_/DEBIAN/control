@@ -1,0 +1,10 @@
+Package: com.xlsn0w.wxmanager
+Name: 微信管家
+Depends: mobilesubstrate
+Architecture: ios
+Description: 微信管家
+Maintainer: XLsn0w
+Author: XLsn0w
+Section: Tweaks
+Version: 2.0.0-1+debug
+Installed-Size: 416
