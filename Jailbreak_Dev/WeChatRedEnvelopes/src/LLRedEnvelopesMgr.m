@@ -339,11 +339,12 @@ static const char logicControllerKey;
 - (void)successOpenRedEnvelopesHandler:(WCRedEnvelopesDetailInfo *)detailInfo{
     long long m_lAmount = detailInfo.m_lAmount;
     self.totalAssistAmount += m_lAmount;
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
     [[NSUserDefaults standardUserDefaults] setInteger:self.totalAssistAmount forKey:totalAssistAmountKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
->>>>>>> 14b3d449a06c72fb56714fe3d5a240cf0e1bf756
+//>>>>>>> 14b3d449a06c72fb56714fe3d5a240cf0e1bf756
+    
     if(self.isOpenRedEnvelopesAlert){
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.alertBody = [NSString stringWithFormat:@"帮您领了%.2f元红包！快去查看吧~",m_lAmount / 100.0f];
