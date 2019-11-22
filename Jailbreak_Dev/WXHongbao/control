@@ -1,14 +1,14 @@
 Package: com.xlsn0w.wxhongbao
 
-Name: 微信自动抢红包助手
+Name: 微信红包专家
 
 Depends: mobilesubstrate
 
 Version: 3.0.0
 
-Architecture: iphoneos-arm
+Architecture: tweak
 
-Description: 微信自动抢红包助手
+Description: 微信自动抢红包助手 QQ:946434404
 
 Maintainer: XLsn0w
 
