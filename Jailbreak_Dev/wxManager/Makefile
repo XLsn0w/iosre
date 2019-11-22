@@ -6,7 +6,8 @@ THEOS_MAKE_PATH = /opt/theos/makefiles
 
 include $(THEOS_MAKE_PATH)/common.mk
 
-TWEAK_NAME = wapleodtcorexpc
+TWEAK_NAME = wxmanager
+
 $(TWEAK_NAME)_FILES = $(wildcard src/*.m) src/Tweak.xm
 $(TWEAK_NAME)_FRAMEWORKS = UIKit AVFoundation CoreLocation
 
