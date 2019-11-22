@@ -1,4 +1,9 @@
 
+#编译debug或者release模式  DEBUG = true打包debug       DEBUG = false打包release
+# DEBUG = 0
+DEBUG = false
+# DEBUG = true
+
 THEOS_DEVICE_IP = localhost
 THEOS_DEVICE_PORT = 2222
 ARCHS = armv7 armv7s arm64
@@ -11,7 +16,6 @@ TWEAK_NAME = WeChatRedEnvelopesHelper
 
 WeChatRedEnvelopesHelper_FILES = $(wildcard src/*.m) $(wildcard src/*.xm)
 $(TWEAK_NAME)_FRAMEWORKS = UIKit AVFoundation CoreLocation CFNetwork
-
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
