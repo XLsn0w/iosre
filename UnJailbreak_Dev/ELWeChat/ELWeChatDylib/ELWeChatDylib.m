@@ -1,0 +1,768 @@
+//  weibo: http://weibo.com/xiaoqing28
+//  blog:  http://www.alonemonkey.com
+//
+//  ELWeChatDylib.m
+//  ELWeChatDylib
+//
+//  Created by Eli on 2018/10/9.
+//  Copyright (c) 2018年 eli. All rights reserved.
+//
+
+#import "ELWeChatDylib.h"
+#import <CaptainHook/CaptainHook.h>
+#import <UIKit/UIKit.h>
+#import <Cycript/Cycript.h>
+#import <MDCycriptManager.h>
+#import "ELWeChatHeaderinfo.h"
+#import "ELSettingViewController.h"
+#import "ELAppManage.h"
+
+CHConstructor{
+    NSLog(INSERT_SUCCESS_WELCOME);
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        
+#ifndef __OPTIMIZE__
+        CYListenServer(6666);
+
+        MDCycriptManager* manager = [MDCycriptManager sharedInstance];
+        [manager loadCycript:NO];
+
+        NSError* error;
+        NSString* result = [manager evaluateCycript:@"UIApp" error:&error];
+        NSLog(@"result: %@", result);
+        if(error.code != 0){
+            NSLog(@"error: %@", error.localizedDescription);
+        }
+#endif
+        
+    }];
+}
+
+
+
+
+CHDeclareClass(CustomViewController)
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+
+//add new method
+CHDeclareMethod1(void, CustomViewController, newMethod, NSString*, output){
+    NSLog(@"This is a new method : %@", output);
+}
+
+#pragma clang diagnostic pop
+
+CHOptimizedClassMethod0(self, void, CustomViewController, classMethod){
+    NSLog(@"hook class method");
+    CHSuper0(CustomViewController, classMethod);
+}
+
+CHOptimizedMethod0(self, NSString*, CustomViewController, getMyName){
+    //get origin value
+    NSString* originName = CHSuper(0, CustomViewController, getMyName);
+    
+    NSLog(@"origin name is:%@",originName);
+    
+    //get property
+    NSString* password = CHIvar(self,_password,__strong NSString*);
+    
+    NSLog(@"password is %@",password);
+    
+    [self newMethod:@"output"];
+    
+    //set new property
+    self.newProperty = @"newProperty";
+    
+    NSLog(@"newProperty : %@", self.newProperty);
+    
+    //change the value
+    return @"Eli";
+    
+}
+
+//add new property
+CHPropertyRetainNonatomic(CustomViewController, NSString*, newProperty, setNewProperty);
+
+CHConstructor{
+    CHLoadLateClass(CustomViewController);
+    CHClassHook0(CustomViewController, getMyName);
+    CHClassHook0(CustomViewController, classMethod);
+    
+    CHHook0(CustomViewController, newProperty);
+    CHHook1(CustomViewController, setNewProperty);
+}
+
+CHDeclareClass(MicroMessengerAppDelegate)
+
+
+CHOptimizedMethod1(self, void, MicroMessengerAppDelegate, applicationDidEnterBackground, id, arg1)
+{
+    ELWeChatConfig *appConfig = [ELAppManage sharedManage].appConfig;
+    
+    [appConfig saveAppInfo:appConfig];
+    
+    CHSuper1(MicroMessengerAppDelegate, applicationDidEnterBackground, arg1);
+}
+
+CHOptimizedMethod1(self, void, MicroMessengerAppDelegate, applicationWillTerminate, id, arg1)
+{
+    
+    ELWeChatConfig *appConfig = [ELAppManage sharedManage].appConfig;
+    
+    [appConfig saveAppInfo:appConfig];
+    
+    
+    
+    CHSuper1(MicroMessengerAppDelegate, applicationWillTerminate, arg1);
+    
+    
+}
+
+
+
+CHOptimizedMethod2(self, BOOL, MicroMessengerAppDelegate, application, UIApplication*, application, didFinishLaunchingWithOptions, NSDictionary*, launchOptions) {
+    
+    return CHSuper2(MicroMessengerAppDelegate, application, application, didFinishLaunchingWithOptions, launchOptions);
+}
+
+
+//红包
+CHDeclareClass(WCRedEnvelopesLogicMgr)
+
+CHOptimizedMethod2(self, void, WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonResponse, HongBaoRes*, arg1, Request, HongBaoReq*, arg2) {
+    CHSuper2(WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonResponse, arg1, Request, arg2);
+    
+    if (arg1.cgiCmdid != 3)
+    {
+        return;
+    }
+    
+    NSString *(^redSignString)(void) = ^NSString *() {
+        NSString *requestString = [[NSString alloc] initWithData:arg2.reqText.buffer encoding:NSUTF8StringEncoding];
+        NSDictionary *requestDictionary = [objc_getClass("WCBizUtil") dictionaryWithDecodedComponets:requestString separator:@"&"];
+        NSString *nativeUrl = [[requestDictionary stringForKey:@"nativeUrl"] stringByRemovingPercentEncoding];
+        NSDictionary *nativeUrlDict = [objc_getClass("WCBizUtil") dictionaryWithDecodedComponets:nativeUrl separator:@"&"];
+        
+        return [nativeUrlDict stringForKey:@"sign"];
+    };
+    
+    NSDictionary *arg1Dict = [[[NSString alloc] initWithData:arg1.retText.buffer encoding:NSUTF8StringEncoding] JSONDictionary];
+    
+    ELRedEnvelopInfo *redInfo = [ELAppManage sharedManage].redInfo;
+    
+    
+    BOOL (^isAutoRedEnvelop)() = ^BOOL() {
+
+        if (!arg1Dict[@"timingIdentifier"])
+        {
+            return NO;
+        }
+        
+        [ELAppManage sharedManage].redInfo.timingIdentifier = arg1Dict[@"timingIdentifier"];
+        
+        if ([arg1Dict[@"receiveStatus"] integerValue] != 0 || [arg1Dict[@"hbStatus"] integerValue] != 2)
+        {
+            return NO;
+        }
+        
+        if(redInfo.isMyself)
+        {
+            return [ELAppManage sharedManage].appConfig.autoRedEnvelop;
+        }
+        else
+        {
+            return [redSignString() isEqualToString:redInfo.sign] && [ELAppManage sharedManage].appConfig.autoRedEnvelop;
+        }
+
+    };
+    
+    if(isAutoRedEnvelop())
+    {
+        WCRedEnvelopesLogicMgr *logicMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("WCRedEnvelopesLogicMgr") class]];
+        [logicMgr OpenRedEnvelopesRequest:[redInfo requestDict]];
+        
+    }
+    
+}
+
+#pragma mark - CMessageMgr
+
+CHDeclareClass(CMessageMgr)
+
+//拦截别人的撤回消息，自己的撤回消息--RevokeMsg
+
+
+CHOptimizedMethod1(self, void, CMessageMgr, onRevokeMsg, CMessageWrap *, msgWrap)
+{
+    if([ELAppManage sharedManage].appConfig.Message)
+    {
+        NSString *m_content = [msgWrap m_nsContent];
+        
+        if([m_content rangeOfString:@"撤回了一条消息"].location != NSNotFound)
+        {
+            NSString *newmsgid = [[[[m_content componentsSeparatedByString:@"<newmsgid>"] lastObject] componentsSeparatedByString:@"</newmsgid>"]firstObject];
+            
+            NSString *session = [[[[m_content componentsSeparatedByString:@"<session>"] lastObject] componentsSeparatedByString:@"</session>"]firstObject];
+            
+            NSString *fromUsrName = [[[[m_content componentsSeparatedByString:@"<![CDATA["] lastObject] componentsSeparatedByString:@"撤回了一条消息]]>"]firstObject];
+            
+            CMessageMgr *CMessageManage = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CMessageMgr")];
+            
+            CMessageWrap *revokemsg = [CMessageManage GetMsg:session n64SvrID:[newmsgid integerValue]];
+            
+            
+            
+            NSString *msgContent = @"";
+            
+            
+            if (revokemsg.m_uiMessageType == 1) {
+                msgContent = [NSString stringWithFormat:@"\"微信助手\"拦截到一条撤回消息：\n%@: %@",fromUsrName, revokemsg.m_nsContent];
+            } else {
+                msgContent = [NSString stringWithFormat:@"\"微信助手\"拦截到一条 %@的撤回消息",fromUsrName];
+            }
+            
+
+            CMessageWrap *newWrap = [[NSClassFromString(@"CMessageWrap") alloc] initWithMsgType:10000];
+            
+            [newWrap setM_nsContent:msgContent];
+            
+            [newWrap setM_nsToUsr:msgWrap.m_nsToUsr];
+            
+            [newWrap setM_nsFromUsr:msgWrap.m_nsFromUsr];
+            
+            [newWrap setM_uiStatus:4];
+            
+            [newWrap setM_uiCreateTime:[msgWrap m_uiCreateTime]];
+            
+            //[newWrap setM_n64MesSvrID:[newmsgid integerValue]];
+            
+            
+            [self AddLocalMsg:session MsgWrap:newWrap fixTime:0 NewMsgArriveNotify:0];
+            
+            
+            return;
+        }
+    }
+    
+
+    
+    CHSuper1(CMessageMgr, onRevokeMsg, msgWrap);
+    
+}
+
+CHOptimizedMethod4(self, void, CMessageMgr, AddLocalMsg, NSString *, arg1, MsgWrap, CMessageWrap*, arg2, fixTime, BOOL, arg3, NewMsgArriveNotify, BOOL, arg4)
+{
+    
+   // NSString *content = [arg2 m_nsContent];
+    
+   // [arg2 setM_nsContent:@"拦截消息"];
+    
+    
+    CHSuper4(CMessageMgr, AddLocalMsg, arg1, MsgWrap, arg2, fixTime, arg3, NewMsgArriveNotify, arg4);
+    
+    
+    
+}
+
+
+
+CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msgWrap){
+    NSString* content = [msgWrap m_nsContent];
+    if([msgWrap m_uiMessageType] == 1){
+        NSLog(@"收到消息: %@", content);
+    }
+    //红包消息
+    if([msgWrap m_uiMessageType] == 49 && [content rangeOfString:@"wxpay://"].location != NSNotFound)
+    {
+        
+        CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
+        CContact *selfContact = [contactManager getSelfContact];
+        
+        
+        BOOL (^isMyself)(void) = ^BOOL()
+        {
+            return [msgWrap.m_nsFromUsr isEqualToString:selfContact.m_nsUsrName];
+        };
+        BOOL (^isMyselfSender)(void) = ^BOOL() {
+            return isMyself() && [msgWrap.m_nsToUsr rangeOfString:@"chatroom"].location != NSNotFound;
+        };
+        
+        
+        /** 是否在黑名单中 */
+        BOOL (^isGroupInBlackList)(void) = ^BOOL() {
+            
+            return [[ELAppManage sharedManage].appConfig.blackList containsObject:msgWrap.m_nsFromUsr];
+            
+        };
+        
+        BOOL (^isAutoRedEnvelop)(void) = ^BOOL ()
+        {
+            if (![ELAppManage sharedManage].appConfig.autoRedEnvelop)
+            {
+                return NO;
+            }
+            
+            if (isGroupInBlackList())
+            {
+                return NO;
+            }
+            
+            return YES;
+        };
+        
+        NSDictionary *(^NativeUrlDict)(NSString *) = ^(NSString *m_NativeUrl) {
+            m_NativeUrl = [m_NativeUrl substringFromIndex:[@"wxpay://c2cbizmessagehandler/hongbao/receivehongbao?" length]];
+            return [objc_getClass("WCBizUtil") dictionaryWithDecodedComponets:m_NativeUrl separator:@"&"];
+        };
+        
+        
+        
+        void (^RedEnvelopReqeust)(NSDictionary *) = ^(NSDictionary *NativeUrlDict) {
+            NSMutableDictionary *m_dict = [NSMutableDictionary dictionary];
+            
+            [m_dict setValue:[NativeUrlDict stringForKey:@"channelid"] forKey:@"channelId"];
+            [m_dict setValue:@"0" forKey:@"agreeDuty"];
+            [m_dict setValue:[[msgWrap m_nsFromUsr] rangeOfString:@"@chatroom"].location != NSNotFound ? @"0" : @"1" forKey:@"inWay"];
+            [m_dict setValue:[NativeUrlDict stringForKey:@"msgtype"] forKey:@"msgType"];
+            [m_dict setValue:[[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl] forKey:@"nativeUrl"];
+            [m_dict setValue:[NativeUrlDict stringForKey:@"sendid"] forKey:@"sendId"];
+            
+            WCRedEnvelopesLogicMgr *logicMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("WCRedEnvelopesLogicMgr") class]];
+            [logicMgr ReceiverQueryRedEnvelopesRequest:m_dict];
+        };
+        
+        
+        void(^saveRedEnvelopData)(NSDictionary *) = ^(NSDictionary *m_dict)
+        {
+            NSMutableDictionary *allDict = [NSMutableDictionary dictionaryWithDictionary:m_dict];
+            
+            [allDict setValue:[selfContact getContactDisplayName] forKey:@"nickName"];
+            
+            [allDict setValue:[[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl] forKey:@"nativeUrl"];
+            
+            [allDict setValue:[selfContact m_nsHeadImgUrl] forKey:@"headImg"];
+            
+            [allDict setValue:isMyself forKey:@"isMyself"];
+            
+            NSString *m_sessionUserName = isMyselfSender() ? msgWrap.m_nsToUsr : msgWrap.m_nsFromUsr;
+            
+            [allDict setValue:m_sessionUserName forKey:@"sessionUserName"];
+            
+            ELRedEnvelopInfo *redInfo = [ELRedEnvelopInfo yy_modelWithJSON:allDict];
+            
+            [ELAppManage sharedManage].redInfo = redInfo;
+            
+            [redInfo saveRedInfo:redInfo];
+            
+            
+        };
+        
+        
+        if (isAutoRedEnvelop())
+        {
+            float sec = [ELAppManage sharedManage].appConfig.Sec;
+            //定时抢红包
+            dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, sec * NSEC_PER_SEC);
+            dispatch_after(delay, dispatch_get_main_queue(), ^{
+                NSString *m_NativeUrl = [[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl];
+                
+                NSDictionary *m_NativeUrlDict = NativeUrlDict(m_NativeUrl);
+                
+                RedEnvelopReqeust(m_NativeUrlDict);
+                
+                saveRedEnvelopData(m_NativeUrlDict);
+            });
+        }
+    }
+    
+    CHSuper2(CMessageMgr, AsyncOnAddMsg, msg, MsgWrap, msgWrap);
+    
+}
+
+CHOptimizedMethod2(self, void, CMessageMgr, AddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msgWrap){
+    
+
+    if ([msgWrap m_uiMessageType] == 1 && [ELAppManage sharedManage].appConfig.groupManage)
+    {
+        
+        NSString *content = [msgWrap m_nsContent];
+        
+        NSString *toUser = [msgWrap m_nsToUsr];
+        
+        
+        CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
+        CContact *selfContact = [contactManager getContactForSearchByName:toUser];
+        
+        BOOL (^isManage)(void) = ^BOOL()
+        {
+            NSString *fromUser = [msgWrap m_nsFromUsr];
+
+            
+            NSString *owner = [selfContact m_nsOwner];
+            
+            
+            return [fromUser isEqualToString:owner];
+            
+            
+        };
+        
+        
+        BOOL (^isContainAll)(NSString *) = ^BOOL(NSString *m_content){
+
+            return [m_content rangeOfString:@"#所有人"].location != NSNotFound;
+        };
+        
+        BOOL (^isContainManage)(NSString *) = ^BOOL(NSString *m_content){
+            
+            return [m_content rangeOfString:@"#踢"].location != NSNotFound;
+        };
+        
+        BOOL (^isInChatRoom)(NSString *) = ^BOOL(NSString *toUser)
+        {
+            return [toUser rangeOfString:@"@chatroom"].location != NSNotFound;
+        };
+        
+        BOOL (^isAllUser)(void) = ^BOOL()
+        {
+            return isContainAll(content) && isInChatRoom(toUser);
+        };
+        
+        BOOL (^isAddManage)(void) = ^BOOL()
+        {
+            return isContainManage(content) && isInChatRoom(toUser);
+        };
+        
+        
+        if (isAllUser())
+        {
+         
+            NSString *realContent = [content substringFromIndex:4];
+            
+            if (isManage())
+            {
+                CGroupMgr *groupMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CGroupMgr")];
+                [groupMgr SetChatRoomDesc:toUser Desc:realContent Flag:1];
+                
+                return;
+            }
+            else
+            {
+                NSArray *result = (NSArray *)[objc_getClass("CContact") getChatRoomMemberWithoutMyself:toUser];
+                
+                
+                NSMutableString *usrString = [NSMutableString string];
+                
+                NSMutableString *nickString = [NSMutableString string];
+                
+                [result enumerateObjectsUsingBlock:^(CContact *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    [usrString appendFormat:@",%@",obj.m_nsUsrName];
+                    [nickString appendFormat:@"@%@ ",obj.m_nsNickName];
+                }];
+                
+                
+                NSString *contentString = nickString;
+                
+                
+                NSString *sourceString = [usrString substringFromIndex:1];
+                
+                msgWrap.m_nsContent = [NSString stringWithFormat:@"%@ %@",contentString,realContent];
+                
+                msgWrap.m_nsMsgSource = [NSString stringWithFormat:@"<msgsource><atuserlist>%@</atuserlist></msgsource>",sourceString];
+                
+                msgWrap.m_nsAtUserList = sourceString;
+            }
+ 
+        }
+        else if (isAddManage())
+        {
+            NSArray *manageList = [[msgWrap m_nsAtUserList] componentsSeparatedByString:@","];
+            
+            
+            CGroupMgr *groupMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CGroupMgr")];
+            [groupMgr DeleteGroupMember:msgWrap.m_nsToUsr withMemberList:manageList scene:0];
+            
+            return;
+            
+        }
+
+    }
+    
+
+    CHSuper2(CMessageMgr, AddMsg, msg, MsgWrap, msgWrap);
+    
+}
+
+
+//修改bundleId减小限制、封号几率
+CHDeclareClass(ManualAuthAesReqData)
+
+CHOptimizedMethod1(self, void, ManualAuthAesReqData, setbundleId, NSString *, bundleId)
+{
+    
+    bundleId = @"com.tencent.xin";
+    
+    CHSuper1(ManualAuthAesReqData, setbundleId, bundleId);
+}
+
+//修改bundleId减小限制、封号几率
+CHDeclareClass(WWKBaseObject)
+
+
+CHOptimizedMethod1(self, void, WWKBaseObject, setbundleID, NSString *, bundleID){
+    
+    bundleID = @"com.tencent.xin";
+    
+    CHSuper1(WWKBaseObject, setbundleID, bundleID);
+    
+
+}
+
+//修改bundleId减小限制、封号几率
+CHDeclareClass(NSDictionary)
+
+CHMethod1(id, NSDictionary, objectForKey, id, arg1)
+{
+    NSString *keys = (NSString *)arg1;
+    
+    if([keys isEqualToString:@"CFBundleIdentifier"])
+    {
+        return @"com.tencent.xin";
+    }
+    
+    CHSuper1(NSDictionary, objectForKey, arg1);
+}
+
+//越狱帮助类
+CHDeclareClass(JailBreakHelper)
+//是否安装插件在APP中
+CHMethod0(BOOL, JailBreakHelper, HasInstallJailbreakPluginInvalidIAPPurchase)
+{
+   return NO;
+}
+
+//是否安装越狱插件
+CHOptimizedMethod1(self, BOOL, JailBreakHelper, HasInstallJailbreakPlugin, id, arg1)
+{
+    return NO;
+}
+
+//是否越狱
+CHMethod0(BOOL, JailBreakHelper, IsJailBreak)
+{
+   return NO;
+}
+
+
+CHDeclareClass(ClientCheckMgr)
+
+
+CHMethod1(void, ClientCheckMgr, checkHookWithSeq, int, arg1)
+{
+    CHSuper1(ClientCheckMgr, checkHookWithSeq, arg1);
+    
+}
+
+
+CHMethod1(void, ClientCheckMgr, checkHook, id, arg1)
+{
+     CHSuper1(ClientCheckMgr, checkHook, arg1);
+}
+
+CHMethod1(void, ClientCheckMgr, checkConsistency, id, arg1)
+{
+    CHSuper1(ClientCheckMgr, checkConsistency, arg1);
+}
+
+
+#pragma mark - NewSettingViewController
+//Hook设置类
+CHDeclareClass(NewSettingViewController)
+//Hook设置类中的reloadTableData方法
+CHMethod0(void, NewSettingViewController, reloadTableData) {
+    //执行原始的方法
+    CHSuper0(NewSettingViewController, reloadTableData);
+    
+    //获取MMTableViewInfo
+    MMTableViewInfo *tableViewInfo = [self valueForKeyPath:@"m_tableViewInfo"];
+    //获取MMTableViewSectionInfo 分组信息
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoDefaut];
+    //设置微信助手Cell 及 点击事件
+    MMTableViewCellInfo *settingCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(WeChatHelper) target:self title:@"微信助手" accessoryType:1];
+    //将微信助手Cell插入分组信息
+    [sectionInfo addCell:settingCell];
+    
+    //将分组信息插入UITableView中第一个
+    [tableViewInfo insertSection:sectionInfo At:0];
+    
+    //获取UITableView
+    MMTableView *tableView = [tableViewInfo getTableView];
+    //重新加载数据
+    [tableView reloadData];
+}
+
+//给NewSettingViewController类添加一个新方法WeChatHelper（微信助手cell的点击事件）
+CHDeclareMethod0(void, NewSettingViewController, WeChatHelper) {
+    //跳转到微信助手设置界面
+    ELSettingViewController *settingViewController = [ELSettingViewController new];
+    [self.navigationController PushViewController:settingViewController animated:YES];
+}
+
+
+//- (void)makeCell:(id)arg1 cellInfo:(id)arg2;
+//设置设备安全。应该是为了减小限制、封号几率
+CHDeclareClass(SetDeviceSafeViewController)
+
+CHOptimizedMethod2(self, void, SetDeviceSafeViewController, makeCell, id, arg1, cellInfo, id, arg2)
+{
+    CHSuper2(SetDeviceSafeViewController, makeCell, arg1, cellInfo, arg2);
+    
+}
+
+//Hook WCDeviceStepObject类用于修改步数
+CHDeclareClass(WCDeviceStepObject)
+
+//Hook WCDeviceStepObject类中的setM7StepCount属性
+CHOptimizedMethod1(self, void, WCDeviceStepObject, setM7StepCount, NSInteger, arg1)
+{
+    //判断是否开起修改步数
+    if([ELAppManage sharedManage].appConfig.StepManage)
+    {
+        //获取配置文件中保存到步数
+        NSInteger ResetNum = [ELAppManage sharedManage].appConfig.ResetStepNum ;
+        //如果arg1大于ResetNum 那么arg1 = arg1 否则arg1 = ResetNum
+        arg1 = arg1 > ResetNum ? arg1 :ResetNum;
+    }
+    //执行原始的方法
+    CHSuper1(WCDeviceStepObject, setM7StepCount, arg1);
+}
+
+
+
+//- (void)onUploadDeviceStepReponse:(id)arg1 stepCount:(unsigned int)arg2 HKStepCount:(unsigned int)arg3 M7StepCount:(unsigned int)arg4 sourceWhiteList:(id)arg5 ErrorCode:(int)arg6;
+
+//这个应该是完善修改步数，减小限制、封号几率
+CHDeclareClass(WCDeviceBrandMgr)
+
+CHOptimizedMethod6(self, void, WCDeviceBrandMgr, onUploadDeviceStepReponse, id, arg1, stepCount, int, arg2, HKStepCount, int, arg3, M7StepCount, int, arg4, sourceWhiteList, id, arg5, ErrorCode, int, arg6)
+{
+    
+    CHSuper6(WCDeviceBrandMgr, onUploadDeviceStepReponse, arg1, stepCount, arg2, HKStepCount, arg3, M7StepCount, arg4, sourceWhiteList, arg5, ErrorCode, arg6);
+    
+}
+
+#pragma mark - CLLocation
+
+//声明Hook的类
+CHDeclareClass(CLLocation);
+
+/**
+ * Hook某个类中的每个属性（方法）
+ * self 一般就为self
+ * CLLocationCoordinate2D return_type 属性类型/返回值类型
+ * CLLocation ClassName 类名
+ * coordinate 属性名称/方法名称
+ */
+CHOptimizedMethod0(self, CLLocationCoordinate2D, CLLocation, coordinate){
+    //1、声明一个CLLocationCoordinate2D
+    //2、通过调用原始方法CHSuper(0, CLLocation, coordinate);进行赋值
+    CLLocationCoordinate2D coordinate = CHSuper(0, CLLocation, coordinate);
+    //判断插件是否设置了经纬度
+    if([ELAppManage sharedManage].appConfig.Location && ([ELAppManage sharedManage].appConfig.mLocation.longitude || [ELAppManage sharedManage].appConfig.mLocation.latitude)){
+        //将插件设置的经纬度赋值给coordinate
+        coordinate = [ELAppManage sharedManage].appConfig.mLocation;
+    }
+    return coordinate;
+}
+
+
+#pragma mark - CHConstructor
+
+CHConstructor{
+    
+    CHLoadLateClass(WCDeviceBrandMgr);
+    
+    CHHook6(WCDeviceBrandMgr, onUploadDeviceStepReponse, stepCount, HKStepCount, M7StepCount, sourceWhiteList, ErrorCode);
+    
+
+    CHLoadLateClass(WCDeviceStepObject);
+    
+    CHHook1(WCDeviceStepObject, setM7StepCount);
+    
+    CHLoadLateClass(SetDeviceSafeViewController);
+    
+    CHHook2(SetDeviceSafeViewController, makeCell, cellInfo);
+    
+    
+    //---MicroMessengerAppDelegate---//
+    CHLoadLateClass(MicroMessengerAppDelegate);
+    CHHook2(MicroMessengerAppDelegate, application, didFinishLaunchingWithOptions);
+    CHHook1(MicroMessengerAppDelegate, applicationWillTerminate);
+     CHHook1(MicroMessengerAppDelegate, applicationDidEnterBackground);
+   
+    //---WCRedEnvelopesLogicMgr---//
+    CHLoadLateClass(WCRedEnvelopesLogicMgr);
+    CHHook2(WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonResponse, Request);
+    
+    //---CMessageMgr---//
+    CHLoadLateClass(CMessageMgr);
+    CHHook1(CMessageMgr, onRevokeMsg);
+    
+    CHClassHook2(CMessageMgr, AsyncOnAddMsg, MsgWrap);
+    CHClassHook2(CMessageMgr, AddMsg, MsgWrap);
+    
+    CHClassHook4(CMessageMgr, AddLocalMsg, MsgWrap, fixTime, NewMsgArriveNotify);
+ 
+    //---NewSettingViewController---//
+    CHLoadLateClass(NewSettingViewController);
+    
+    CHClassHook0(NewSettingViewController, reloadTableData);
+    
+    CHClassHook0(NewSettingViewController, WeChatHelper);
+    
+    //---NewSettingViewController---//
+    CHLoadLateClass(ManualAuthAesReqData);
+
+    
+    CHClassHook1(ManualAuthAesReqData, setbundleId);
+    
+    
+    CHLoadLateClass(WWKBaseObject);
+    
+    CHClassHook1(WWKBaseObject, setbundleID);
+    
+    
+    CHLoadLateClass(ClientCheckMgr);
+    
+    CHClassHook1(ClientCheckMgr, checkHookWithSeq);
+    CHClassHook1(ClientCheckMgr, checkHook);
+    CHClassHook1(ClientCheckMgr, checkConsistency);
+    
+    CHLoadLateClass(JailBreakHelper);
+    CHClassHook0(JailBreakHelper, HasInstallJailbreakPluginInvalidIAPPurchase);
+    CHClassHook1(JailBreakHelper, HasInstallJailbreakPlugin);
+    CHClassHook0(JailBreakHelper, IsJailBreak);
+    
+    CHLoadLateClass(NSDictionary);
+  
+    CHClassHook1(NSDictionary, objectForKey);
+    
+    
+    //** 修改定位 *//
+    CHLoadLateClass(CLLocation);
+    //Hook类 参数：0没有参数 CLLocation类名 coordinate属性名称/方法名称
+    CHClassHook(0, CLLocation, coordinate);
+    
+}
+
+
+
+
+
+
+
+
+
