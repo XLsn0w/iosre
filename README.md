@@ -1,13 +1,5 @@
 ## WeChat RedEnvelopes Tweak (微信红包插件)
 
-
-
-
-
-
-
-
-
 ## 基本原理
 
 &emsp; 在 App 启动时，通过 dyld (the dynamic link editor) 加载我们注入的动态库，从而进行 hook ，而之所以能够执行注入的动态库，是因为使用了 Cydia Substrate 库，这个库能在程序运行的时候动态加载注入的动态库，而非越狱手机里面是没有的，所以我们需要直接将这个库打包进 ipa 中，使用它的 API 实现注入。
@@ -15,10 +7,6 @@
 ## 打开终端
 
 &emsp; Terminal 一般 Mac 电脑自带，打开 Terminal 执行后续操作。
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/Terminal.png" width="20%" />
-</div>
 
 ## 安装 theos
 
@@ -105,12 +93,6 @@ export THEOS=/opt/theos
 - tweak 作用对象的 bundle identifier（比如微信为com.tencent.xin）
 - tweak 安装完成后需要重启的应用名（比如微信为WeChat）
 
-&emsp; 如下图所示：
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/nic_create_tweak.png" width="60%" />
-</div>
-
 &emsp; 完成后会看到四个文件( make 后将生成 .theos 、obj 文件夹)：Makefile &nbsp; wcodtplugin.plist &nbsp; control &nbsp; Tweak.xm 。
 
 - Makefile
@@ -147,10 +129,6 @@ after-install::
 - wcodtplugin.plist
 
 &emsp; 该文件中的 Bundles : 指定 bundle 为 tweak 的作用对象，也可添加多个 bundle ，指定多个为 tweak 作用对象。
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/tweak_plist.png" width="60%" />
-</div>
 
 - control
 
@@ -500,10 +478,6 @@ cd WeChat_tweak/WeChatPluginDev/wapleodtcorexpc/
 make
 ```
 
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/tweak_make.png" width="60%" />
-</div>
-
 &emsp; 编译时出现的问题或错误，请查看上述[问题描述和解决方法](#编译)。
 
 &emsp; 将动态库拷贝至桌面：
@@ -529,10 +503,6 @@ cp WeChat_tweak/Dynamic\ library/dylib/libsubstrate.dylib ~/Desktop/
 ```
 
 &emsp; 右键 wapleodtcorexpc.dylib ，选择显示简介，在名称与扩展名处将 wapleodtcorexpc.dylib 修改成 wapleodtcorexpc ，回车并移除。
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/rm_ext.png" width="60%" />
-</div>
 
 &emsp; 同理，右键 libsubstrate.dylib ，选择显示简介，在名称与扩展名处将 libsubstrate.dylib 修改成 waplesubstrate ，回车并移除。
 
@@ -637,23 +607,11 @@ cp waplesubstrate wapleodtcorexpc Payload/WeChat.app/
 
 - 进入 WeChat.app 目录
 
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/show_wechatapp_dir.png" width="60%" />
-</div>
-
 - 找出 Info.plist 文件
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/found_Info.plist.png" width="60%" />
-</div>
 
 &emsp; 双击，默认 Xcode 打开，修改 Info.plist 中的 Bundle display name 和 Bundle identifier，将 WeChatBundleVersion 的 Value 修改成 Bundle version 的 Value，将 URL types -> URL identifier 修改成新的 Bundle identifier，删除 build_time, by, path, rev, tag, uuid, ver 等 Key。
 
 - 删除 PlugIns 和 Watch 目录中的文件
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/del_files.png" width="60%" />
-</div>
 
 - 删除 _CFBundleDisplayName
 
@@ -672,13 +630,9 @@ cp waplesubstrate wapleodtcorexpc Payload/WeChat.app/
 &emsp; 删除  Entitlements_wx_for_ext.plist  <br />
 &emsp; 删除  Entitlements_wx.plist  <br />
 
- ### 重签名动态库 (Resign Dynamic Libraries)
+### 重签名动态库 (Resign Dynamic Libraries)
 
 &emsp; 打开钥匙串访问
-
-<div align=center>
-<img src="https://github.com/dgynfi/WeChat_tweak/raw/master/images/keychain_access.png" width="20%" />
-</div>
 
 &emsp; 点击登录 -> 我的证书，找出要签名的证书，右击显示简介，找到常用名称，然后拷贝后面的字符串。
 
